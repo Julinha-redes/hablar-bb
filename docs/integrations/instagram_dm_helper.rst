@@ -1,20 +1,20 @@
-Instagram DM helper (safe draft mode)
-====================================
+Instagram DM helper (app executável em modo seguro)
+====================================================
 
-This utility helps analyze the first message from a DM conversation export and draft
-an affectionate response for **human review**.
+Este app foi feito para quem **não programa**: você abre uma janela, escolhe o JSON,
+informa o username da influenciadora e clica em um botão.
 
-Important
----------
+Modo seguro
+-----------
 
-* It does not log in to Instagram.
-* It does not send messages automatically.
-* It is intended to keep interactions respectful and compliant.
+* Não faz login no Instagram.
+* Não envia mensagens automaticamente.
+* Apenas analisa um histórico exportado e sugere uma resposta para revisão humana.
 
-Input format
-------------
+Formato do JSON
+---------------
 
-Provide a JSON file with a list of conversations:
+O arquivo de entrada deve conter uma lista de conversas:
 
 .. code-block:: json
 
@@ -28,9 +28,38 @@ Provide a JSON file with a list of conversations:
      }
    ]
 
-Usage
------
+Como abrir o app
+----------------
+
+Opção 1 (mais simples):
 
 .. code-block:: bash
 
-   python utils/instagram_dm_helper.py --input conversations.json --influencer saminho --seed 42
+   ./executar_app_instagram.sh
+
+Opção 2:
+
+.. code-block:: bash
+
+   python3 utils/instagram_dm_helper_app.py
+
+Como usar
+---------
+
+1. Clique em **Selecionar arquivo** e escolha seu JSON.
+2. Preencha o campo **Username da influenciadora** (ex.: ``saminho``).
+3. (Opcional) informe uma semente aleatória para repetir o mesmo sorteio.
+4. Clique em **Analisar conversa**.
+5. Revise a sugestão e, se quiser, use **Salvar resposta em TXT**.
+
+Gerar executável (.exe) com PyInstaller (opcional)
+---------------------------------------------------
+
+Se você quiser um arquivo único executável, pode empacotar com PyInstaller:
+
+.. code-block:: bash
+
+   pip install pyinstaller
+   pyinstaller --onefile --windowed utils/instagram_dm_helper_app.py
+
+O executável será gerado na pasta ``dist/``.
